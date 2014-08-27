@@ -13,14 +13,14 @@ This package defines a new type, `Doublelength`, which wraps the `head` and `tai
 
 The following methods are defined on `DoublelengthFloat`s:
 
-Julia method | Name in (Dekker, 1971)
--- | --
-`+(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `sum2`
-`-(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `sub2`
-`⋅(a::T, b::T) -> Doublelength{T}` | `mul12`
-`*(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `mul2`
-`/(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `div2`
-`√(a::Doublelength{T}) -> Doublelength{T}` (`sqrt`) | `sqrt2`
+ Julia method | Name in (Dekker, 1971)
+ ------------ | ----------------------
+ `+(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `sum2`
+ `-(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `sub2`
+ `⋅(a::T, b::T) -> Doublelength{T}` | `mul12`
+ `*(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `mul2`
+ `/(a::Doublelength{T}, b::Doublelength{T}) -> Doublelength{T}` | `div2`
+ `√(a::Doublelength{T}) -> Doublelength{T}` (`sqrt`) | `sqrt2`
 
 The elementary operations `+`, `-`, `*` and `/` (together with `sqrt`) are closed under the field of `DoublelengthFloat`s. Additionally, a multiplication method `⋅` is provided which produces a `Doublelength{T}` from multiplying two `T`s together.
 
