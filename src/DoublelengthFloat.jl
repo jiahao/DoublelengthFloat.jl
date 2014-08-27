@@ -1,6 +1,6 @@
 module DoublelengthFloat
 
-import Base: +, -, ⋅, *, /, √, convert
+import Base: +, -, ⋅, *, /, √, convert, precision
 export Doublelength
 
 immutable Doublelength{T<:FloatingPoint} <: FloatingPoint
