@@ -1,21 +1,21 @@
 module DoublelengthFloat
 
 import Base: +, -, ⋅, *, /, √, convert
-export DoublelengthFloat
+export Doublelength
 
-immutable DoublelengthFloat{T<:FloatingPoint} <: FloatingPoint
+immutable Doublelength{T<:FloatingPoint} <: FloatingPoint
     head :: T
     tail :: T
 end
-DoublelengthFloat(x::FloatingPoint) = DoublelengthFloat(x, zero(x))
-convert{T<:FloatingPoint}(::Type{DoublelengthFloat{T}}, x::T) = DoublelengthFloat(x)
+Doublelength(x::FloatingPoint) = Doublelength(x, zero(x))
+convert{T<:FloatingPoint}(::Type{Doublelength{T}}, x::T) = Doublelength(x)
 
 #The following precision computation is based on the maximal error constant of 12.1 in (7.10),
 #which is slightly less than 4 bits' worth of error.
-precision(a::DoublelengthFloat) = precision(a.head) + precision(a.head) - 4
+precision(a::Doublelength) = precision(a.head) + precision(a.head) - 4
 
 #add2
-function +{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
+function +{T<:FloatingPoint}(a::Doublelength{T}, b::Doublelength{T})
     x, xx = a.head, a.tail
     y, yy = b.head, b.tail
     r = x + y
@@ -23,11 +23,11 @@ function +{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
                           y - r + x + xx + yy
     z = r + s
     zz = r - z + s
-    DoublelengthFloat(z, zz)
+    Doublelength(z, zz)
 end
 
 #sub2
-function -{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
+function -{T<:FloatingPoint}(a::Doublelength{T}, b::Doublelength{T})
     x, xx = a.head, a.tail
     y, yy = b.head, b.tail
     r = x - y
@@ -35,7 +35,7 @@ function -{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
                          -y - r + x + xx - yy
     z = r + s
     zz = r - z + s
-    DoublelengthFloat(z, zz)
+    Doublelength(z, zz)
 end
 
 #mul12
@@ -52,11 +52,11 @@ function ⋅{T<:FloatingPoint}(x::T, y::T)
     q = hx * ty + tx * hy
     z = p + q
     zz = p - z + q + tx * ty
-    DoublelengthFloat(z, zz)
+    Doublelength(z, zz)
 end
 
 #mul2
-function *{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
+function *{T<:FloatingPoint}(a::Doublelength{T}, b::Doublelength{T})
     x, xx = a.head, a.tail
     y, yy = b.head, b.tail
     C = x ⋅ y #mul12
@@ -64,11 +64,11 @@ function *{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
     cc = x*yy + xx*y + cc
     z = c + cc
     zz = c - z + cc
-    DoublelengthFloat(z, zz)
+    Doublelength(z, zz)
 end
 
 #div2
-function /{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
+function /{T<:FloatingPoint}(a::Doublelength{T}, b::Doublelength{T})
     x, xx = a.head, a.tail
     y, yy = b.head, b.tail
     c = x / y
@@ -77,11 +77,11 @@ function /{T<:FloatingPoint}(a::DoublelengthFloat{T}, b::DoublelengthFloat{T})
     cc = (x - u - uu + xx - c * yy)/y
     z = c + cc
     zz = c - z + cc
-    DoublelengthFloat(z, zz)
+    Doublelength(z, zz)
 end
 
 #sqrt2
-function √{T<:FloatingPoint}(a::DoublelengthFloat{T})
+function √{T<:FloatingPoint}(a::Doublelength{T})
     x, xx = a.head, a.tail
     x ≥ 0 || throw(DomainError())
     c = √x
@@ -90,7 +90,7 @@ function √{T<:FloatingPoint}(a::DoublelengthFloat{T})
     cc = (x - u - uu + xx) * 0.5/c
     y = c + cc
     yy = c - y + cc
-    DoublelengthFloat(y, yy)
+    Doublelength(y, yy)
 end
 
 end # module
